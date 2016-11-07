@@ -105,48 +105,53 @@ function extraction_CSV( varargin )
     assignin('base','time1',stime1);
     assignin('base','time2',stime2);
     
+    
+    [row, col] = size(swhite(1,2:end));
+    timelen = zeros(1,col); % creates blank array of total time
+    count = 1; %sets initial to 1
+    for i = 1:col
+        timelen(i) = count;
+        count = count+0.2; % increments by 0.2 to get total time length
+    end
+    
+    assignin('base','timelen',timelen);
+    
     stitle = 'Sensor ';
 
     figure('Name', 'Blue Sensors','Position', [100 30 750 700]); 
     for i = 1:12
-        s = [stitle num2str(i)]; subplot(4,3,i); plot(sblue(i,2:end));
-        title(s);
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,sblue(i,2:end));
+        title(s); xlabel('time(secs)');
     end
     
     figure('Name', 'Red Sensors','Position', [100 30 750 700]); 
     for i = 1:12
-        s = [stitle num2str(i)]; subplot(4,3,i); plot(sred(i,2:end));
-        title(s);
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,sred(i,2:end));
+        title(s); xlabel('time(secs)');
     end
     
     figure('Name', 'Green Sensors','Position', [100 30 750 700]); 
     for i = 1:12
-        s = [stitle num2str(i)]; subplot(4,3,i); plot(sgreen(i,2:end));
-        title(s);
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,sgreen(i,2:end));
+        title(s); xlabel('time(secs)');
     end
     
     figure('Name', 'White Lux Sensors','Position', [100 30 750 700]);
     for i = 1:12
-        s = [stitle num2str(i)];
-        subplot(4,3,i);
-        plot(swhite(i,2:end));
-        title(s);
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,swhite(i,2:end));
+        title(s); xlabel('time(secs)');
     end
     
     figure('Name', 'Time 1','Position', [130 30 750 700]);
     for i = 1:12
-        s = [stitle num2str(i)];
-        subplot(4,3,i);
-        plot(stime1(i,2:end));
-        title(s);
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,stime1(i,2:end));
+        title(s); xlabel('time(secs)');
     end
     
     figure('Name', 'Time 2','Position', [160 30 750 700]);
     for i = 1:12
-        s = [stitle num2str(i)];
-        subplot(4,3,i);
-        plot(stime2(i,2:end));
-        title(s);
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,stime2(i,2:end));
+        title(s); xlabel('time(secs)');
     end
     
 end
