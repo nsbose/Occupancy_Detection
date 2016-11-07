@@ -1,7 +1,7 @@
 function extraction_CSV( varargin )
 %EXTRACTION_CSV Summary of this function goes here
 %   Extracts RGB and Lux values from a given CSV file
-    %RunCamera();
+    
     filename = varargin{1};
     fid = fopen(filename);
     output = textscan(fid,'%s%s%s%s%s%s%s%s%s', 'Delimiter',',');
@@ -107,23 +107,23 @@ function extraction_CSV( varargin )
     
     stitle = 'Sensor ';
 
-%     figure('Name', 'Blue Sensors','Position', [100 30 750 700]); for i =
-%     1:12
-%         s = [stitle num2str(i)]; subplot(4,3,i); plot(sblue(i,2:end));
-%         title(s);
-%     end
-%     
-%     figure('Name', 'Red Sensors','Position', [100 30 750 700]); for i =
-%     1:12
-%         s = [stitle num2str(i)]; subplot(4,3,i); plot(sred(i,2:end));
-%         title(s);
-%     end
-%     
-%     figure('Name', 'Green Sensors','Position', [100 30 750 700]); for i =
-%     1:12
-%         s = [stitle num2str(i)]; subplot(4,3,i); plot(sgreen(i,2:end));
-%         title(s);
-%     end
+    figure('Name', 'Blue Sensors','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(sblue(i,2:end));
+        title(s);
+    end
+    
+    figure('Name', 'Red Sensors','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(sred(i,2:end));
+        title(s);
+    end
+    
+    figure('Name', 'Green Sensors','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(sgreen(i,2:end));
+        title(s);
+    end
     
     figure('Name', 'White Lux Sensors','Position', [100 30 750 700]);
     for i = 1:12
@@ -148,5 +148,6 @@ function extraction_CSV( varargin )
         plot(stime2(i,2:end));
         title(s);
     end
+    
 end
 
