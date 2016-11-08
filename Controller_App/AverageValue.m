@@ -30,15 +30,7 @@ diff_green = abs(green - avg_green);
 diff_blue = abs(blue - avg_blue);
 
 
-% filtering to smooth data
-windowSize = 5;
-b = (1/windowSize) * ones(1,windowSize);
-a = 1;
 
-diff_white = filter(b,a,diff_white);
-diff_red = filter(b,a,diff_red);
-diff_green = filter(b,a,diff_green);
-diff_blue = filter(b,a,diff_blue);
 stitle = 'Sensor ';
 
     figure('Name', 'Abs Blue Sensors Difference','Position', [100 30 750 700]); 
@@ -75,6 +67,48 @@ assignin('base', 'diff_white', diff_white);
 assignin('base', 'diff_red', diff_red);
 assignin('base', 'diff_green', diff_green);
 assignin('base', 'diff_blue', diff_blue);
+
+
+% filtering to smooth data
+windowSize = 5;
+b = (1/windowSize) * ones(1,windowSize);
+a = 1;
+
+diff_white_f = filter(b,a,diff_white);
+diff_red_f = filter(b,a,diff_red);
+diff_green_f = filter(b,a,diff_green);
+diff_blue_f = filter(b,a,diff_blue);
+
+assignin('base', 'diff_white_f', diff_white_f);
+assignin('base', 'diff_red_f', diff_red_f);
+assignin('base', 'diff_green_f', diff_green_f);
+assignin('base', 'diff_blue_f', diff_blue_f);
+
+    figure('Name', 'Filtered Abs Blue Sensors Difference','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_blue_f(i,:));
+        title(s); xlabel('time(secs)');
+    end
+    
+    figure('Name', 'Filtered Abs Red Sensors Difference','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_red_f(i,:));
+        title(s); xlabel('time(secs)');
+    end
+    
+    figure('Name', 'Filtered Abs Green Sensors Difference','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_green_f(i,:));
+        title(s); xlabel('time(secs)');
+    end
+    
+    figure('Name', 'Filtered Abs White Lux Sensors Difference','Position', [100 30 750 700]);
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_white_f(i,:));
+        title(s); xlabel('time(secs)');
+    end
+
+
 
 end
 

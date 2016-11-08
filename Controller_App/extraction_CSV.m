@@ -142,17 +142,17 @@ function extraction_CSV( varargin )
         title(s); xlabel('time(secs)');
     end
     
-    figure('Name', 'Time 1','Position', [130 30 750 700]);
-    for i = 1:12
-        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,stime1(i,2:end));
-        title(s); xlabel('time(secs)');
-    end
-    
-    figure('Name', 'Time 2','Position', [160 30 750 700]);
-    for i = 1:12
-        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,stime2(i,2:end));
-        title(s); xlabel('time(secs)');
-    end
-    
+%     figure('Name', 'Time 1','Position', [130 30 750 700]);
+%     for i = 1:12
+%         s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,stime1(i,2:end));
+%         title(s); xlabel('time(secs)');
+%     end
+%     
+%     figure('Name', 'Time 2','Position', [160 30 750 700]);
+%     for i = 1:12
+%         s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen,stime2(i,2:end));
+%         title(s); xlabel('time(secs)');
+%     end
+%     
 end
 
