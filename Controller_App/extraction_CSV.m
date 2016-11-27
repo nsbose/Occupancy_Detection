@@ -158,5 +158,6 @@ function extraction_CSV( varargin )
 
 
     AverageValue;
+    Detection;
 end
 
