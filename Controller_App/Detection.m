@@ -49,10 +49,11 @@ assignin('base','hold_peaks_blue',hold_peaks_blue);
 final_tally(1) = 0; % clears the value
 
 x = 1; % smoothing of the edges
+thres_percentage = 35.0;
 for j = 1:12 % from sensors 1 to 12
     
     totalcount = 0;
-    
+    init_max_white = 0;
     init_max_white = max(hold_peaks_white{j,1});
     init_max_white_ind = find(hold_peaks_white{j,1} == init_max_white);
     
@@ -60,12 +61,17 @@ for j = 1:12 % from sensors 1 to 12
     hold_peaks_white{j,1}(init_max_white_ind-x:init_max_white_ind+x) = 0; 
      
     count = 1;
+    b = 0;
     max_store = []; % clears for every new sensor
+    if isempty(hold_peaks_white{j,1})
+        init_max_white = 0;
+        b = 1;
+    end
     max_store(count) = init_max_white;
     a = 0;
     % counts the number of peaks and stores the values
     while a == 0 % loops through calculate the max
-        %count = count + 1; % update the counter
+        
         temp_max = max(hold_peaks_white{j,1});
         max_white_ind = find(hold_peaks_white{j,1} == temp_max); % dynamically update the maximum peak
         if (((length(hold_peaks_white{j,1})- 1) >= max_white_ind) & max_white_ind > x)
@@ -73,39 +79,46 @@ for j = 1:12 % from sensors 1 to 12
             
             diff_max_white = (abs(init_max_white - temp_max) /  init_max_white) * 100;
             
-            if diff_max_white < 30.0 % threshold of anything less than 15%
+            if diff_max_white < thres_percentage % threshold of anything less than 35%
                 count = count + 1; % update the counter
                 max_store(count) = temp_max;
             end
         else
-            a = 1;
+            a = 1; % breaks the loop
         end
 
     end
-        
-    assignin('base','max_store',max_store);
-    assignin('base', 'peakcount', count);
-    if mod(count,2) == 0
-        totalcount = count / 2;
-    else
-        totalcount = round(count / 2);
+    
+    totalcount = count/2; % division is done, every 2 peaks = 1 count
+
+    if b == 1
+        totalcount = 0;
     end
+    
     final_tally(j,1) = j;
     final_tally(j,2) = totalcount;
     
 end
 
-average = round(mean(final_tally(:,2)));
-mode_val = mode(final_tally(:,2));
+%average = (mean(final_tally(:,2)));
+
+[ii,~,val] = find(final_tally(:,2)); % ignores if there are zeros
+%average1 = [accumarray(ii,val,[],@mean)];
+
+average = mean(val);
+mode_val = mode(val);
+%mode_val = (mode(final_tally(:,2)));
+
 
 occupants = 0; % compares between mean and mode and takes
 if average >= mode_val
-    occupants = average; % higher mean takes presidence over mode
+    occupants = round(average); % higher mean takes presidence over mode
 else
-    occupants = mode_val;
+    occupants = round(mode_val);
 end
 
-
+assignin('base','max_store',max_store);
+assignin('base', 'peakcount', count);
 assignin('base','final_tally',final_tally);
 assignin('base','Total_Occupants', occupants);
 

@@ -17,13 +17,7 @@ avg_red = mean(red(:,1:75),2);
 avg_green = mean(green(:,1:75),2);
 avg_blue = mean(blue(:,1:75),2);
 
-% [row, col] = size(white);
-% timelen = zeros(1,col); % creates blank array of total time
-% count = 1; %sets initial to 1
-% for i = 1:col
-%     timelen(i) = count;
-%     count = count+0.2; % increments by 0.2 to get total time length
-% end
+
 diff_white = abs(white - avg_white);
 diff_red = abs(red - avg_red);
 diff_green = abs(green - avg_green);
@@ -32,31 +26,31 @@ diff_blue = abs(blue - avg_blue);
 
 
 stitle = 'Sensor ';
-% 
-%     figure('Name', 'Abs Blue Sensors Difference','Position', [100 30 750 700]); 
-%     for i = 1:12
-%         s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_blue(i,:));
-%         title(s); xlabel('time(secs)');
-%     end
-%     
-%     figure('Name', 'Abs Red Sensors Difference','Position', [100 30 750 700]); 
-%     for i = 1:12
-%         s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_red(i,:));
-%         title(s); xlabel('time(secs)');
-%     end
-%     
-%     figure('Name', 'Abs Green Sensors Difference','Position', [100 30 750 700]); 
-%     for i = 1:12
-%         s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_green(i,:));
-%         title(s); xlabel('time(secs)');
-%     end
-%     
-%     figure('Name', 'Abs White Lux Sensors Difference','Position', [100 30 750 700]);
-%     for i = 1:12
-%         s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_white(i,:));
-%         title(s); xlabel('time(secs)');
-%     end
-% 
+
+    figure('Name', 'Abs Blue Sensors Difference','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_blue(i,:));
+        title(s); xlabel('time(secs)');
+    end
+    
+    figure('Name', 'Abs Red Sensors Difference','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_red(i,:));
+        title(s); xlabel('time(secs)');
+    end
+    
+    figure('Name', 'Abs Green Sensors Difference','Position', [100 30 750 700]); 
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_green(i,:));
+        title(s); xlabel('time(secs)');
+    end
+    
+    figure('Name', 'Abs White Lux Sensors Difference','Position', [100 30 750 700]);
+    for i = 1:12
+        s = [stitle num2str(i)]; subplot(4,3,i); plot(timelen, diff_white(i,:));
+        title(s); xlabel('time(secs)');
+    end
+
 
 assignin('base', 'avg_white', avg_white);
 assignin('base', 'avg_red', avg_red);
