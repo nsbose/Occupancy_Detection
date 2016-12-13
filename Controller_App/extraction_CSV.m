@@ -1,4 +1,25 @@
 function extraction_CSV( varargin )
+%%
+% -------------------------------------------------
+% Boston University Master of Science Project - Fall 2016
+% Department of Electrical and Computer Engineering
+% Author: Neladri Bose
+% Advisor: Thomas D.C. Little
+% Title: Occupancy Detection Using Single-Pixel Sensors
+% 
+% 
+% Note: This file, along with Detection.m and AverageValue.m
+% only post process the data. Please consult proper documentation to
+% use camera hardware. 
+% 
+% This code is designed to handle data collected at 200ms only
+% To post process and run this code simply do the following command
+% 
+% extraction_CSV 'filename.csv'
+% 
+% -------------------------------------------------
+%%
+
 %EXTRACTION_CSV Summary of this function goes here
 %   Extracts RGB and Lux values from a given CSV file
     
